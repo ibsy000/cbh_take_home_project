@@ -1,16 +1,15 @@
 const crypto = require("crypto");
 
 exports.deterministicPartitionKey = (event) => {
-    const MAX_PARTITION_KEY_LENGTH = 256;
     let candidate;
-
+    
     // if there is an event
     if (event) {
         // if the event has a partitionKey
         if (event.partitionKey) {
             // the candidate equals the event's paritionKey
             candidate = event.partitionKey;
-        // if the event does not have a partitionKey
+            // if the event does not have a partitionKey
         } else {
             // create a variable data to convert the event into a string
             const data = JSON.stringify(event);
@@ -20,7 +19,7 @@ exports.deterministicPartitionKey = (event) => {
             candidate = crypto.createHash("sha3-512").update(data).digest("hex");
         }
     }
-
+    
     // there is a candidate value
     if (candidate) {
         // if the datatype of candidate is not a string
@@ -29,12 +28,13 @@ exports.deterministicPartitionKey = (event) => {
             candidate = JSON.stringify(candidate);
         }
         // if there is no candidate value
-        } else {
-            // the candidate will equal the trivial_partition_key
-            candidate = "0";
-        }
-
+    } else {
+        // the candidate will equal the trivial_partition_key
+        candidate = "0";
+    }
+    
     // if the candidate's value's length is greater than the max_partition_key_length 
+    const MAX_PARTITION_KEY_LENGTH = 256;
     if (candidate.length > MAX_PARTITION_KEY_LENGTH) {
         // the candidate now equals a created hash instance that updates
         // the hash content using the update() function, to get the hash value
