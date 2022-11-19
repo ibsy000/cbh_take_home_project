@@ -9,3 +9,15 @@ You've been asked to refactor the function `deterministicPartitionKey` in [`dpk.
 You will be graded on the exhaustiveness and quality of your unit tests, the depth of your refactor, and the level of insight into your thought process provided by the written explanation.
 
 ## Your Explanation Here
+With the time I was allotted I refactored the given function deterministicPartitionKey
+by removing the variable trivial_partition_key because it was only used in one
+place in the function and was never redelcared so I hard-coded the value in line 50.
+I added notes for each statement in the function to provide clarity on what each
+step is doing. I also moved the if (candidate.length > MAX_PARTITION_KEY_LENGTH)
+statement into the if (candidate) statement, it made sense that the length 
+statement should only be executed if candidate is truthy. I also slid the 
+MAX_PARTITION_KEY_LENGTH variable to go with the statement it belongs to since
+the variable was not used elsewhere. I believe if I was given more context as to
+why this function was created and what purpose I may have been able to provide
+more refactoring. I would really appreciate some feedback on where I could improve.
+Thank you so much for this opportunity!
