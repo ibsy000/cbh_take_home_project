@@ -1,7 +1,6 @@
 const crypto = require("crypto");
 
 exports.deterministicPartitionKey = (event) => {
-    const TRIVIAL_PARTITION_KEY = "0";
     const MAX_PARTITION_KEY_LENGTH = 256;
     let candidate;
 
@@ -32,7 +31,7 @@ exports.deterministicPartitionKey = (event) => {
         // if there is no candidate value
         } else {
             // the candidate will equal the trivial_partition_key
-            candidate = TRIVIAL_PARTITION_KEY;
+            candidate = "0";
         }
 
     // if the candidate's value's length is greater than the max_partition_key_length 
