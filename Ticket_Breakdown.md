@@ -16,3 +16,39 @@ Based on the information given, break this ticket down into 2-5 individual ticke
 You will be graded on the level of detail in each ticket, the clarity of the execution plan within and between tickets, and the intelligibility of your language. You don't need to be a native English speaker, but please proof-read your work.
 
 ## Your Breakdown Here
+I've honestly never worked on tickets before but I will make some informed guesses.
+
+I think every Agent should still be assigned a database id, but we could add a
+new column to the Agent table to store custom ids.
+I think this solution wouldn't take too long to accomplish.
+The table would just need to be altered.
+
+Ex: 
+ALTER TABLE Agent
+ADD customID INTEGER;
+
+Then a procedure could be created to insert data into the customID column.
+
+Ex:
+CREATE OR REPLACE PROCEDURE add_customID(
+    customID INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Agent(
+        customID
+    )
+VALUES (
+    customID
+    );
+END;
+$$;
+
+The procedure would then be called any time a Facility would like to assign a custom
+id to an Agent.
+
+Ex:
+CALL add_customID(1234)
+
+I would greatly appreciate any feedback! Thank you so much for this opportunity!
