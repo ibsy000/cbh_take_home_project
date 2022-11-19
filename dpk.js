@@ -40,11 +40,7 @@ exports.deterministicPartitionKey = (event) => {
         // the candidate now equals a created hash instance that updates
         // the hash content using the update() function, to get the hash value
         // we use digest
-        candidate = crypto.createHash("sha3-512").update(candidate).digest("hex");
-    }
-    // create a function to create a hash value for the candidate
-    function candidateHash(candidate) {
-        return crypto.createHash("sha3-512").update(candidate).digest("hex");
+        candidate = crypto.createHash("sha3-512").update(candidate).digest("hex");;
     }
 
     // return the value of the candidate
